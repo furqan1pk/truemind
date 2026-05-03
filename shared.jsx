@@ -24,12 +24,6 @@ const Nav = ({ lang = "en", setLang, current = "home" }) => {
             ))}
           </div>
           <div className="nav-cta">
-            {setLang && (
-              <div className="lang-toggle" role="tablist" aria-label="Language">
-                <button onClick={() => setLang("en")} className={lang === "en" ? "active" : ""}>EN</button>
-                <button onClick={() => setLang("ur")} className={lang === "ur" ? "active" : ""}>اردو</button>
-              </div>
-            )}
             <a href="download.html" className="btn btn-primary">
               {c.nav.bookFree} <Arrow />
             </a>
