@@ -1,0 +1,48 @@
+/* Direction B — Modern Confident
+   Override theme tokens. Loaded AFTER styles.css. */
+:root {
+  --bg: #FBF9F4;
+  --bg-elev: #FFFFFF;
+  --bg-deep: #F2EEE4;
+  --ink: #0E1B22;
+  --ink-soft: #2A3942;
+  --ink-mute: #62707A;
+  --line: #DCD6C7;
+  --line-soft: #EAE4D5;
+  --sage: #2D4A5C;
+  --sage-deep: #1A3344;
+  --sage-soft: #5A7C8E;
+  --terracotta: #E8B560;
+  --terracotta-deep: #C99540;
+  --gold: #E8B560;
+}
+
+body { background: var(--bg); }
+
+/* Tighter, more confident type */
+.h-display {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.h-display .accent {
+  font-family: var(--sans);
+  font-style: normal;
+  font-weight: 300;
+  color: var(--ink-mute) !important;
+  letter-spacing: -0.04em;
+}
+
+/* Square-er buttons */
+.btn { border-radius: 10px; padding: 16px 24px; font-weight: 500; }
+.btn-primary { background: var(--ink); color: var(--bg-elev); }
+.btn-primary:hover { background: #000; }
+.btn-accent { background: var(--terracotta); color: var(--ink); }
+.btn-ghost { border: 1px solid var(--ink); color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--bg-elev); }
+
+.card { border-radius: 14px; }
+.chip { border-radius: 8px; }
+.chip .dot { background: var(--terracotta); }
+
+/* Headings switched to display sans */
+h1, h2, h3 { letter-spacing: -0.025em; }

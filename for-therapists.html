@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>For therapists · TrueMind</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <script type="text/babel" src="logo.jsx"></script>
+  <script type="text/babel" src="content.jsx"></script>
+  <script type="text/babel" src="shared.jsx"></script>
+  <script type="text/babel" src="page-shell.jsx"></script>
+  <script type="text/babel" src="home-hero.jsx"></script>
+  <script type="text/babel" src="home-sections.jsx"></script>
+
+  <script type="text/babel" data-presets="react">
+    const App = () => (
+      <Page current="therapists">
+        <section style={{paddingTop:80, paddingBottom: 64}}>
+          <div className="container">
+            <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 48, alignItems: "center" }} className="ther-hero">
+              <div>
+                <div className="chip" style={{ marginBottom: 24 }}><span className="dot"/> For therapists</div>
+                <h1 className="h-display">
+                  Build a practice. <span className="accent" style={{fontFamily:"var(--serif)",fontStyle:"italic",color:"var(--terracotta)",fontWeight:400}}>Keep your boundaries.</span>
+                </h1>
+                <p className="lede" style={{marginTop:24, maxWidth:560}}>
+                  TrueMind handles the scheduling, billing, intake, and reminders — so your hours stay clinical, not clerical. Join 600+ verified therapists already practicing on the platform.
+                </p>
+                <div style={{marginTop:32, display:"flex", gap:12, flexWrap:"wrap"}}>
+                  <a href="#apply" className="btn btn-primary">Apply to join <Arrow/></a>
+                  <a href="#how" className="btn btn-ghost">How it works</a>
+                </div>
+              </div>
+              <TherapistCard />
+            </div>
+          </div>
+          <style>{`@media (max-width: 900px) { .ther-hero { grid-template-columns: 1fr !important; } }`}</style>
+        </section>
+
+        <section className="surface-cream">
+          <div className="container">
+            <div className="section-head">
+              <div className="eyebrow">What you get</div>
+              <h2 className="h-1" style={{maxWidth:760}}>The boring parts of running a private practice — quietly handled.</h2>
+            </div>
+            <div className="grid-3">
+              {[
+                {t:"Smart scheduling", b:"Clients book your real availability, syncing with your Google or Apple calendar. Buffers, breaks, and out-of-office baked in."},
+                {t:"No-show protection", b:"Late cancellations and no-shows are billed automatically per your policy. You set the rules — we enforce them, gently."},
+                {t:"Encrypted notes", b:"SOAP-style session notes with templates. End-to-end encrypted, exportable, audit-ready."},
+                {t:"Weekly payouts in PKR", b:"Automated billing through our partner payment processor. Funds settle to your bank weekly, with full statements."},
+                {t:"Verified-licence badge", b:"We verify with PPA & equivalent bodies once. Clients see the badge, you skip the awkward conversation."},
+                {t:"Caseload that respects you", b:"Cap your weekly hours, set hard stops, take breaks. The platform won't push past what you set."},
+              ].map((f,i) => (
+                <div key={i} className="card">
+                  <div style={{ width: 36, height: 36, borderRadius: 10, background: ["var(--sage)","var(--terracotta)","var(--gold)","var(--sage-soft)","var(--ink)","var(--sage-deep)"][i], marginBottom: 24 }}/>
+                  <h3 className="h-3" style={{marginBottom:8}}>{f.t}</h3>
+                  <p className="body" style={{margin:0}}>{f.b}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="how">
+          <div className="container">
+            <div className="section-head">
+              <div className="eyebrow">Joining the platform</div>
+              <h2 className="h-1" style={{maxWidth:760}}>Three steps. Roughly two weeks. Then you're seeing clients.</h2>
+            </div>
+            <div className="grid-3">
+              {[
+                {n:"01", t:"Apply", b:"Tell us about your training, licensure, and the people you want to work with. Takes about 15 minutes."},
+                {n:"02", t:"Verify", b:"Our clinical team reviews your credentials with PPA / equivalent. You meet a member of the team for a 30-minute conversation."},
+                {n:"03", t:"Onboard", b:"Set up your profile, calendar, and rates. We'll send you your first matched clients within a week of going live."},
+              ].map((s,i) => (
+                <div key={i} style={{borderTop:"1px solid var(--ink)", paddingTop:24}}>
+                  <div style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontSize: 18, color: "var(--terracotta)", marginBottom:36 }}>{s.n}</div>
+                  <h3 className="h-2" style={{fontSize:28, marginBottom:12}}>{s.t}</h3>
+                  <p className="body-lg">{s.b}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="surface-cream">
+          <div className="container">
+            <div className="section-head"><div className="eyebrow">From our therapists</div><h2 className="h-1">Quietly making private practice possible.</h2></div>
+            <div className="grid-2">
+              {[
+                {q:"I went from juggling three messaging apps and a paper calendar to having all my clinical work in one place. I got 4 hours a week back.", who:"Dr. Hira Khan, Clinical Psychologist", where:"Lahore"},
+                {q:"The verification process was rigorous, in a good way. Clients arrive already trusting that I'm legit — I can focus on the work.", who:"Dr. Asad Mahmood, Psychotherapist", where:"Karachi"},
+              ].map((q,i) => (
+                <figure key={i} className="card" style={{margin:0}}>
+                  <blockquote style={{margin:0, fontFamily:"var(--serif)", fontSize:22, lineHeight:1.4, fontStyle:"italic", textWrap:"pretty"}}>"{q.q}"</blockquote>
+                  <figcaption style={{marginTop:24, paddingTop:16, borderTop:"1px solid var(--line-soft)", display:"flex", justifyContent:"space-between", fontSize:13}}>
+                    <span style={{fontWeight:500}}>{q.who}</span><span className="muted">{q.where}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <CTABlock
+          title="Practice well. Sleep well."
+          sub="Apply in 15 minutes. Verification within 2 weeks. First clients within a month."
+          ctaLabel="Apply to join"
+          ctaHref="#apply"
+          secondary={{href:"contact.html", label:"Talk to our team"}}
+        />
+      </Page>
+    );
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

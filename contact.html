@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Contact & Crisis support · TrueMind</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <script type="text/babel" src="logo.jsx"></script>
+  <script type="text/babel" src="content.jsx"></script>
+  <script type="text/babel" src="shared.jsx"></script>
+  <script type="text/babel" src="page-shell.jsx"></script>
+  <script type="text/babel" src="home-hero.jsx"></script>
+  <script type="text/babel" src="home-sections.jsx"></script>
+
+  <script type="text/babel" data-presets="react">
+    const App = () => (
+      <Page current="contact">
+        {/* CRISIS CALLOUT — top of page */}
+        <section style={{paddingTop:48, paddingBottom:0}}>
+          <div className="container">
+            <div style={{background:"var(--terracotta)", color:"var(--bg-elev)", borderRadius:20, padding:"32px 40px", display:"grid", gridTemplateColumns:"auto 1fr auto", gap:32, alignItems:"center"}} className="crisis-row">
+              <div style={{width:56, height:56, borderRadius:"50%", background:"rgba(244,239,230,0.18)", display:"grid", placeItems:"center", fontSize:28, fontWeight:600}}>!</div>
+              <div>
+                <div style={{fontSize:13, letterSpacing:"0.08em", textTransform:"uppercase", opacity:0.85, marginBottom:6}}>If you're in crisis</div>
+                <h2 className="h-3" style={{color:"var(--bg-elev)", fontSize:22, marginBottom:6}}>You don't have to go through this alone — please call now.</h2>
+                <p style={{margin:0, fontSize:15, opacity:0.9}}>TrueMind is not an emergency service. If you or someone you love is in immediate danger, please use the lines on the right.</p>
+              </div>
+              <div style={{display:"grid", gap:8, fontSize:14, minWidth:240}}>
+                <div style={{display:"flex", justifyContent:"space-between", padding:"8px 0", borderBottom:"1px solid rgba(244,239,230,0.2)"}}><span>Pakistan Emergency</span><strong>1166</strong></div>
+                <div style={{display:"flex", justifyContent:"space-between", padding:"8px 0", borderBottom:"1px solid rgba(244,239,230,0.2)"}}><span>Umang Helpline</span><strong>0311 7786264</strong></div>
+                <div style={{display:"flex", justifyContent:"space-between", padding:"8px 0"}}><span>Rozan Helpline</span><strong>0304 1111741</strong></div>
+              </div>
+            </div>
+          </div>
+          <style>{`@media (max-width: 900px) { .crisis-row { grid-template-columns: 1fr !important; } }`}</style>
+        </section>
+
+        <PageHeader
+          eyebrow="Contact"
+          title={<>We'd love to <span className="accent" style={{fontFamily:"var(--serif)",fontStyle:"italic",color:"var(--terracotta)",fontWeight:400}}>hear from you.</span></>}
+          lede="Whether you're a patient, a therapist, an employer, or a journalist — there's a quiet desk waiting for your message."
+        />
+
+        <section style={{paddingTop:24}}>
+          <div className="container">
+            <div style={{display:"grid", gridTemplateColumns:"1fr 1.2fr", gap:64}} className="contact-grid">
+              <div style={{display:"grid", gap:20}}>
+                {[
+                  {t:"General questions", e:"hello@truemind.health", n:"Replies within a working day."},
+                  {t:"For therapists", e:"clinicians@truemind.health", n:"Onboarding and clinical questions."},
+                  {t:"For employers", e:"work@truemind.health", n:"Group plans and benefits."},
+                  {t:"Press & media", e:"press@truemind.health", n:"Same-day for time-sensitive."},
+                  {t:"Privacy & data", e:"privacy@truemind.health", n:"Data requests, deletions, security."},
+                ].map((c,i) => (
+                  <div key={i} className="card">
+                    <div style={{fontSize:12, color:"var(--ink-mute)", letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:8}}>{c.t}</div>
+                    <a href={`mailto:${c.e}`} style={{fontSize:18, fontWeight:500, letterSpacing:"-0.01em", color:"var(--ink)", borderBottom:"1px solid var(--line)", paddingBottom:2}}>{c.e}</a>
+                    <div style={{fontSize:13, color:"var(--ink-mute)", marginTop:8}}>{c.n}</div>
+                  </div>
+                ))}
+              </div>
+
+              <form className="card" style={{padding:36}} onSubmit={(e) => {e.preventDefault(); alert("Thanks — we'll be in touch.");}}>
+                <h2 className="h-2" style={{marginBottom:8}}>Send us a note</h2>
+                <p className="body" style={{margin:"0 0 28px"}}>If your message is time-sensitive, please email us directly — forms can take a day or two.</p>
+                <div style={{display:"grid", gap:16}}>
+                  <Field label="Your name" placeholder="Aisha Khan"/>
+                  <Field label="Email" placeholder="aisha@example.com" type="email"/>
+                  <Field label="I'm reaching out as…" placeholder="Patient / Therapist / Employer / Press / Other" tag="select" options={["Patient","Therapist","Employer","Press","Other"]}/>
+                  <Field label="What's on your mind?" placeholder="Tell us a little about why you're getting in touch." tag="textarea" rows={5}/>
+                  <button className="btn btn-primary" style={{justifyContent:"center", marginTop:8}}>Send message <Arrow/></button>
+                </div>
+                <div style={{fontSize:12, color:"var(--ink-mute)", marginTop:18}}>By sending, you agree to our privacy policy. We never share contact details.</div>
+              </form>
+            </div>
+          </div>
+          <style>{`@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr !important; } }`}</style>
+        </section>
+
+        <section className="surface-cream">
+          <div className="container">
+            <div style={{display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:32}} className="loc-grid">
+              {[
+                {city:"Karachi", addr:"7th Floor, Centre Point\nShahrah-e-Faisal\nKarachi 75350", tag:"HQ"},
+                {city:"Lahore", addr:"Office 12, Arfa Software Tech Park\nFerozepur Road\nLahore 54600", tag:"Operations"},
+                {city:"Dubai (Q3 2026)", addr:"DIFC Innovation Hub\nDubai, UAE", tag:"Coming soon"},
+              ].map((l,i) => (
+                <div key={i}>
+                  <div style={{fontSize:11, color:"var(--terracotta)", letterSpacing:"0.08em", textTransform:"uppercase", fontWeight:500, marginBottom:8}}>{l.tag}</div>
+                  <h3 className="h-3" style={{marginBottom:8}}>{l.city}</h3>
+                  <p style={{fontSize:14, color:"var(--ink-soft)", lineHeight:1.55, whiteSpace:"pre-line", margin:0}}>{l.addr}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <style>{`@media (max-width: 900px) { .loc-grid { grid-template-columns: 1fr !important; } }`}</style>
+        </section>
+      </Page>
+    );
+
+    const Field = ({ label, placeholder, type = "text", tag = "input", rows, options }) => {
+      const baseStyle = {
+        width:"100%", padding:"14px 16px", border:"1px solid var(--line)", borderRadius:10,
+        fontFamily:"inherit", fontSize:15, background:"var(--bg)", color:"var(--ink)", outline:"none"
+      };
+      return (
+        <label style={{display:"block"}}>
+          <span style={{display:"block", fontSize:13, color:"var(--ink-soft)", marginBottom:8, fontWeight:500}}>{label}</span>
+          {tag === "textarea" ? <textarea rows={rows} placeholder={placeholder} style={{...baseStyle, resize:"vertical", lineHeight:1.55}}/> :
+           tag === "select" ? <select style={baseStyle}>{options.map(o => <option key={o}>{o}</option>)}</select> :
+           <input type={type} placeholder={placeholder} style={baseStyle}/>}
+        </label>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

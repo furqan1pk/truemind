@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>How it works · TrueMind</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <script type="text/babel" src="logo.jsx"></script>
+  <script type="text/babel" src="content.jsx"></script>
+  <script type="text/babel" src="shared.jsx"></script>
+  <script type="text/babel" src="page-shell.jsx"></script>
+  <script type="text/babel" src="home-hero.jsx"></script>
+  <script type="text/babel" src="home-sections.jsx"></script>
+
+  <script type="text/babel" data-presets="react">
+    const App = () => (
+      <Page current="patients">
+        <PageHeader
+          eyebrow="For patients"
+          title={<>From first message to first session <span className="accent" style={{fontFamily:"var(--serif)",fontStyle:"italic",color:"var(--terracotta)",fontWeight:400}}>in under a day.</span></>}
+          lede="Therapy shouldn't feel like a maze. Here's exactly how TrueMind works — what to expect at each step, and how long each one takes."
+        />
+
+        {/* Detailed steps */}
+        <section style={{paddingTop:24}}>
+          <div className="container">
+            {[
+              { n: "01", t: "Tell us what you need", time: "3 minutes",
+                b: "A short, private intake. We'll ask what you're going through, what kind of support you've had before (none is fine), what language you'd like to speak in, and what days of the week tend to work for you. None of it is shared without your say-so.",
+                bullets: ["No long forms — just the essentials","Skip anything that feels too personal","Edit your answers anytime"]
+              },
+              { n: "02", t: "Get matched in minutes", time: "Under 1 hour",
+                b: "Our clinical team reviews your intake and surfaces three therapists whose specialities, language, and availability fit you. Each profile shows their training, the concerns they work with most, and a short note from them about how they practice.",
+                bullets: ["3 therapist matches, ranked by fit","Read their notes, see their availability","Pick yourself — or ask us to recommend one"]
+              },
+              { n: "03", t: "Book your first session", time: "30 sec",
+                b: "Pick a time that works. Your first 30-minute session is free — a chance to meet your therapist, talk through what brought you here, and decide together whether to continue. No card needed.",
+                bullets: ["First session free, no card required","Reschedule up to 12 hours before","Add it to your calendar in one tap"]
+              },
+              { n: "04", t: "Meet — entirely in the app", time: "30–50 minutes",
+                b: "Tap to join. Encrypted video, with a built-in note pad if you want to jot something down. After the session, your therapist may share a private summary, exercises to try, or — if appropriate — a prescription handled by a partner physician.",
+                bullets: ["End-to-end encrypted video","Private notes & journal","Prescriptions through partner doctors"]
+              },
+              { n: "05", t: "Keep going at your pace", time: "Ongoing",
+                b: "Weekly, fortnightly, or whenever you need. Your history follows you in the app — no re-explaining yourself. If your therapist isn't the right fit after a few sessions, we'll re-match you within 24 hours.",
+                bullets: ["Flexible cadence","Switch therapists with one tap","Pause or end anytime"]
+              },
+            ].map((s, i, arr) => (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "120px 1fr 1fr", gap: 48, padding: "40px 0", borderTop: "1px solid var(--line)", borderBottom: i === arr.length - 1 ? "1px solid var(--line)" : "none" }} className="step-row">
+                <div>
+                  <div style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontSize: 28, color: "var(--terracotta)" }}>{s.n}</div>
+                  <div style={{ fontSize: 11, color: "var(--ink-mute)", letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 8 }}>{s.time}</div>
+                </div>
+                <div>
+                  <h3 className="h-2" style={{ marginBottom: 16 }}>{s.t}</h3>
+                  <p className="body-lg" style={{ maxWidth: 480 }}>{s.b}</p>
+                </div>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 12, alignSelf: "center" }}>
+                  {s.bullets.map((b, k) => (
+                    <li key={k} style={{ display: "flex", gap: 12, fontSize: 15, color: "var(--ink-soft)" }}>
+                      <Check color="var(--sage)"/> {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <style>{`@media (max-width: 900px) { .step-row { grid-template-columns: 1fr !important; gap: 16px !important; } }`}</style>
+        </section>
+
+        <PrivacySection />
+        <TrustSection />
+        <CTABlock
+          title="Your first session is on us."
+          sub="No commitment. Meet a therapist, see if it clicks, decide later."
+          ctaLabel="Book my free session"
+          secondary={{ href: "faq.html", label: "Read the FAQ" }}
+        />
+      </Page>
+    );
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

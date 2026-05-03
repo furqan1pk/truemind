@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>About · TrueMind</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <script type="text/babel" src="logo.jsx"></script>
+  <script type="text/babel" src="content.jsx"></script>
+  <script type="text/babel" src="shared.jsx"></script>
+  <script type="text/babel" src="page-shell.jsx"></script>
+  <script type="text/babel" src="home-hero.jsx"></script>
+  <script type="text/babel" src="home-sections.jsx"></script>
+
+  <script type="text/babel" data-presets="react">
+    const App = () => (
+      <Page current="about">
+        <section style={{paddingTop:80, paddingBottom:48}}>
+          <div className="container">
+            <div className="eyebrow" style={{marginBottom:16}}>About</div>
+            <h1 className="h-display" style={{maxWidth:1000}}>
+              Mental health care should be <span className="accent" style={{fontFamily:"var(--serif)",fontStyle:"italic",color:"var(--terracotta)",fontWeight:400}}>private, accessible,</span> and <span className="accent" style={{fontFamily:"var(--serif)",fontStyle:"italic",color:"var(--sage)",fontWeight:400}}>built for the people it serves.</span>
+            </h1>
+          </div>
+        </section>
+
+        <section style={{paddingTop:24}}>
+          <div className="container">
+            <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:64}} className="about-grid">
+              <div>
+                <div className="eyebrow" style={{marginBottom:14}}>Our story</div>
+                <h2 className="h-2" style={{marginBottom:20}}>Started in Karachi. Built for the region.</h2>
+                <p className="body-lg" style={{marginBottom:16}}>
+                  TrueMind began with a simple observation: in Pakistan, accessing therapy meant calling a clinic, explaining yourself to a receptionist, and hoping the therapist on the other side spoke your language and understood your context.
+                </p>
+                <p className="body-lg" style={{marginBottom:16}}>
+                  We thought the entry should be quieter. Open the app. Tell it what you're going through. Meet someone trained, in private, on your schedule. That's it.
+                </p>
+                <p className="body-lg">
+                  We're starting in Pakistan, and expanding across the UAE, Saudi Arabia, and Bangladesh through 2026 — bringing the same standards of clinical rigour and privacy everywhere we go.
+                </p>
+              </div>
+              <div className="photo" style={{aspectRatio:"4/5"}}>
+                <PlaceholderPhoto label="Our team in Karachi" tone="terracotta"/>
+              </div>
+            </div>
+          </div>
+          <style>{`@media (max-width: 900px) { .about-grid { grid-template-columns: 1fr !important; } }`}</style>
+        </section>
+
+        <section className="surface-deep">
+          <div className="container">
+            <div className="section-head"><div className="eyebrow">Our principles</div><h2 className="h-1" style={{color:"var(--bg-elev)", maxWidth:780}}>Four things we won't compromise on.</h2></div>
+            <div className="grid-2">
+              {[
+                {t:"Privacy is the product", b:"End-to-end encryption isn't a feature, it's the floor. Anonymous booking. No data sold, ever. We measure success by how little of your story we hold."},
+                {t:"Clinical rigour", b:"Every therapist is licence-verified. We follow APA-aligned ethics, audit notes regularly, and partner with practising clinicians on every product decision."},
+                {t:"Built for the region", b:"Urdu-first design. Therapists who understand family expectations, code-switching, and what stigma actually feels like here. Global tech, local context."},
+                {t:"Affordability is non-negotiable", b:"Therapy that costs more than groceries isn't really accessible. We work with insurers, employers, and partner clinics to keep care reachable."},
+              ].map((p,i) => (
+                <div key={i} style={{padding:32, background:"rgba(244,239,230,0.04)", borderRadius:20}}>
+                  <div style={{fontFamily:"var(--serif)", fontStyle:"italic", fontSize:28, color:"var(--gold)", marginBottom:16}}>0{i+1}</div>
+                  <h3 className="h-2" style={{color:"var(--bg-elev)", fontSize:26, marginBottom:12}}>{p.t}</h3>
+                  <p className="body-lg">{p.b}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="container">
+            <div className="section-head"><div className="eyebrow">Trust & partners</div><h2 className="h-1" style={{maxWidth:760}}>We work alongside the institutions you already trust.</h2></div>
+            <div style={{display:"grid", gridTemplateColumns:"repeat(6, 1fr)", gap:24, marginTop:24}} className="logo-grid">
+              {["Aga Khan University","Shifa Foundation","Pakistan Psychological Assoc.","Karachi Wellness Clinic","Ziauddin Hospitals","SIUT"].map((p,i) => (
+                <div key={i} style={{aspectRatio:"5/2", border:"1px solid var(--line)", borderRadius:14, display:"grid", placeItems:"center", padding:16, textAlign:"center", fontSize:13, color:"var(--ink-mute)", letterSpacing:"-0.005em"}}>
+                  {p}
+                </div>
+              ))}
+            </div>
+            <p style={{textAlign:"center", marginTop:20, fontSize:13, color:"var(--ink-mute)"}}>Partner names representative — full directory available on request.</p>
+          </div>
+          <style>{`@media (max-width: 900px) { .logo-grid { grid-template-columns: repeat(2, 1fr) !important; } }`}</style>
+        </section>
+
+        <section className="surface-cream">
+          <div className="container">
+            <div className="section-head"><div className="eyebrow">Where we're going</div><h2 className="h-1" style={{maxWidth:760}}>Pakistan today. The region tomorrow.</h2></div>
+            <div className="grid-4">
+              {[
+                {f:"🇵🇰", t:"Pakistan", s:"Live", b:"Karachi, Lahore, Islamabad, and 12 more cities."},
+                {f:"🇦🇪", t:"UAE", s:"Q3 2026", b:"Dubai, Abu Dhabi. Arabic + English support."},
+                {f:"🇸🇦", t:"Saudi Arabia", s:"Q4 2026", b:"Riyadh, Jeddah. Arabic-first practice."},
+                {f:"🇧🇩", t:"Bangladesh", s:"Early 2027", b:"Dhaka, Chittagong. Bengali + English."},
+              ].map((c,i) => (
+                <div key={i} className="card">
+                  <div style={{fontSize:32, marginBottom:16}}>{c.f}</div>
+                  <h3 className="h-3" style={{marginBottom:6}}>{c.t}</h3>
+                  <div style={{fontSize:12, color:"var(--terracotta)", fontWeight:500, letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:12}}>{c.s}</div>
+                  <p className="body" style={{margin:0}}>{c.b}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <CTABlock title="Want to work with us?" sub="We're hiring clinicians, engineers, and designers who care about doing this right." ctaLabel="See open roles" ctaHref="contact.html" secondary={{href:"contact.html", label:"Press inquiries"}}/>
+      </Page>
+    );
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

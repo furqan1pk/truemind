@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>TrueMind — Therapy that meets you where you are</title>
+  <meta name="description" content="TrueMind connects you with licensed therapists across Pakistan — entirely through our app. Book in minutes. Speak in private. Heal at your pace." />
+  <meta name="theme-color" content="#F4EFE6" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="logo.jsx"></script>
+  <script type="text/babel" src="content.jsx"></script>
+  <script type="text/babel" src="shared.jsx"></script>
+  <script type="text/babel" src="three-orb.jsx"></script>
+  <script type="text/babel" src="home-hero.jsx"></script>
+  <script type="text/babel" src="home-sections.jsx"></script>
+
+  <script type="text/babel" data-presets="react">
+    const { useState } = React;
+
+    const App = () => {
+      const [lang, setLang] = useState("en");
+
+      return (
+        <>
+          <Nav lang={lang} setLang={setLang} current="home" />
+          <main>
+            <HeroEditorial lang={lang} />
+            <TickerSection />
+            <ConcernsSection lang={lang} />
+            <HowSection lang={lang} />
+            <TherapistSection lang={lang} />
+            <TrustSection lang={lang} />
+            <PrivacySection lang={lang} />
+            <DownloadSection lang={lang} />
+            <FaqSection lang={lang} />
+          </main>
+          <Footer lang={lang} />
+        </>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>FAQ · TrueMind</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <script type="text/babel" src="logo.jsx"></script>
+  <script type="text/babel" src="content.jsx"></script>
+  <script type="text/babel" src="shared.jsx"></script>
+  <script type="text/babel" src="page-shell.jsx"></script>
+  <script type="text/babel" src="home-hero.jsx"></script>
+  <script type="text/babel" src="home-sections.jsx"></script>
+
+  <script type="text/babel" data-presets="react">
+    const { useState } = React;
+    const FAQ_GROUPS = [
+      { group: "Getting started", items: [
+        { q: "How do I know my therapist is qualified?", a: "Every therapist on TrueMind is licence-verified by our clinical team. We check credentials with the Pakistan Psychological Association and equivalent bodies before they ever appear in your matches. You can see each therapist's training and specialities on their profile." },
+        { q: "Is my first session really free?", a: "Yes. Your first 30-minute session is on us, no card needed. It's a chance to meet your therapist and decide if they're the right fit before committing to anything." },
+        { q: "How long does it take to get matched?", a: "Most people are matched within an hour of completing their intake. You'll see three therapists ranked by fit, and you choose who to book with." },
+        { q: "Can I switch therapists?", a: "Anytime, with one tap. We'll re-match you within 24 hours. Your history follows you only with your consent." },
+      ]},
+      { group: "Privacy & safety", items: [
+        { q: "Is my data really private?", a: "Yes. Sessions, messages, and notes are end-to-end encrypted. We never sell or share your data with third parties. You can delete your record at any time from settings." },
+        { q: "Can I use a fake name?", a: "You can use any display name you'd like. Your therapist needs your real name only for clinical records and prescriptions, but it's never visible to anyone outside that relationship." },
+        { q: "What happens in a crisis?", a: "If you indicate you're in immediate danger, the app will surface local crisis lines (1166 in Pakistan) and connect you to a same-day on-call clinician where available. We are not a substitute for emergency services." },
+      ]},
+      { group: "Sessions & scheduling", items: [
+        { q: "Are sessions audio, video, or chat?", a: "Most sessions are video, but you can request audio-only or chat-based sessions if that feels safer or more practical for you." },
+        { q: "How long is a session?", a: "Standard sessions are 50 minutes. Your free intake session is 30 minutes. Some therapists offer 30 or 80-minute options for specific needs." },
+        { q: "What if I need to reschedule?", a: "Reschedule anytime up to 12 hours before your session, free of charge. Within 12 hours, your therapist's late-cancel policy applies (it's shown before you book)." },
+        { q: "Do you offer Urdu sessions?", a: "Yes — most of our therapists speak Urdu fluently and many are bilingual in English. You can filter by language during matching." },
+      ]},
+      { group: "Pricing & insurance", items: [
+        { q: "How much does it cost?", a: "Specific PKR rates are shown in-app once you're matched, based on your therapist's experience and session length. Your first session is always free." },
+        { q: "Do you take insurance?", a: "We're partnered with several Pakistani health insurers and corporate benefits providers. Check the in-app coverage tool, or ask your HR." },
+        { q: "Can my employer pay?", a: "Yes — TrueMind for Work lets employers offer therapy as a benefit. Ask your HR to reach out to us, or share their email and we'll do it." },
+      ]},
+      { group: "For therapists", items: [
+        { q: "How do I apply to join?", a: "Use our therapist application form. The process takes about 15 minutes; verification typically takes 1–2 weeks. You can begin seeing clients within a month of going live." },
+        { q: "What does TrueMind take?", a: "Our platform fee is transparent and shown in your earnings dashboard. You set your own rates within the platform's range." },
+      ]},
+    ];
+
+    const FAQItem = ({ q, a }) => {
+      const [open, setOpen] = useState(false);
+      return (
+        <div style={{borderTop:"1px solid var(--line)", padding:"24px 0"}}>
+          <button onClick={() => setOpen(!open)} style={{width:"100%", display:"flex", justifyContent:"space-between", alignItems:"center", textAlign:"left", padding:0}}>
+            <span className="h-3" style={{fontSize:18}}>{q}</span>
+            <span style={{width:32, height:32, borderRadius:"50%", border:"1px solid var(--line)", display:"grid", placeItems:"center", flexShrink:0, marginLeft:16}}>
+              {open ? <Minus/> : <Plus/>}
+            </span>
+          </button>
+          {open && <p className="body-lg fade-up" style={{marginTop:16, maxWidth:720}}>{a}</p>}
+        </div>
+      );
+    };
+
+    const App = () => (
+      <Page current="faq">
+        <PageHeader
+          eyebrow="FAQ"
+          title={<>Things people ask <span className="accent" style={{fontFamily:"var(--serif)",fontStyle:"italic",color:"var(--terracotta)",fontWeight:400}}>before they start.</span></>}
+          lede="If you're wondering, you're not the only one. Here are the questions we hear most. Don't see yours? Email hello@truemind.health."
+        />
+
+        <section style={{paddingTop:24}}>
+          <div className="container-narrow">
+            {FAQ_GROUPS.map((g,i) => (
+              <div key={i} style={{marginBottom:64}}>
+                <div className="eyebrow" style={{marginBottom:16}}>{g.group}</div>
+                {g.items.map((it,k) => <FAQItem key={k} {...it}/>)}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <CTABlock title="Still have questions?" sub="We answer most emails within a working day." ctaLabel="Contact us" ctaHref="contact.html"/>
+      </Page>
+    );
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
