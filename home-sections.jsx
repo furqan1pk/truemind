@@ -1,7 +1,96 @@
 // Homepage body sections — concerns, how, therapists, trust, privacy, download, faq
 
+// Abstract SVG illustrations per concern. Calm, brand-palette, no stock photos.
+const ConcernArt = ({ kind, color, accent }) => {
+  const stroke = { stroke: color, strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round", fill: "none" };
+  const fill = { fill: color };
+  const accentStroke = { stroke: accent, strokeWidth: 1.4, strokeLinecap: "round", fill: "none", opacity: 0.7 };
+
+  if (kind === "anxiety") {
+    // Restless ripples — agitated wave lines
+    return (
+      <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
+        <path {...stroke} d="M10 38 Q25 28, 40 38 T70 38 T100 38 T130 38" />
+        <path {...stroke} d="M10 56 Q25 44, 40 56 T70 56 T100 56 T130 56" opacity="0.85" />
+        <path {...stroke} d="M10 74 Q25 62, 40 74 T70 74 T100 74 T130 74" opacity="0.6" />
+        <path {...accentStroke} d="M10 92 Q25 84, 40 92 T70 92 T100 92" />
+        <circle cx="92" cy="32" r="3.5" {...fill} opacity="0.6" />
+      </svg>
+    );
+  }
+  if (kind === "depression") {
+    // Heaviness — descending circles, like rain or weight
+    return (
+      <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
+        <circle cx="36" cy="22" r="3" {...fill} opacity="0.45" />
+        <circle cx="60" cy="32" r="4.5" {...fill} opacity="0.6" />
+        <circle cx="84" cy="26" r="3" {...fill} opacity="0.45" />
+        <line {...stroke} x1="36" y1="32" x2="36" y2="76" opacity="0.4" />
+        <line {...stroke} x1="60" y1="42" x2="60" y2="92" />
+        <line {...stroke} x1="84" y1="36" x2="84" y2="80" opacity="0.4" />
+        <circle cx="36" cy="80" r="6" {...fill} opacity="0.6" />
+        <circle cx="60" cy="96" r="9" {...fill} />
+        <circle cx="84" cy="84" r="6" {...fill} opacity="0.6" />
+        <path {...accentStroke} d="M22 108 Q60 102, 100 108" />
+      </svg>
+    );
+  }
+  if (kind === "burnout") {
+    // Burning out — radiating lines from a fading center
+    return (
+      <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
+        <circle cx="60" cy="60" r="14" {...fill} opacity="0.8" />
+        <circle cx="60" cy="60" r="22" {...stroke} opacity="0.4" />
+        {[...Array(8)].map((_, i) => {
+          const a = (i * Math.PI * 2) / 8;
+          const x1 = 60 + Math.cos(a) * 30;
+          const y1 = 60 + Math.sin(a) * 30;
+          const x2 = 60 + Math.cos(a) * 48;
+          const y2 = 60 + Math.sin(a) * 48;
+          return <line key={i} {...stroke} x1={x1} y1={y1} x2={x2} y2={y2} opacity={i % 2 ? 0.4 : 0.85} />;
+        })}
+        <path {...accentStroke} d="M14 60 Q24 50, 14 40" opacity="0.5" />
+      </svg>
+    );
+  }
+  if (kind === "relationships") {
+    // Two overlapping circles, slightly off — connection + tension
+    return (
+      <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
+        <circle cx="46" cy="56" r="26" {...stroke} />
+        <circle cx="78" cy="64" r="26" {...stroke} opacity="0.85" />
+        <circle cx="62" cy="60" r="3" {...fill} />
+        <path {...accentStroke} d="M26 96 Q60 90, 96 96" />
+        <circle cx="32" cy="34" r="2.5" {...fill} opacity="0.5" />
+        <circle cx="92" cy="38" r="2.5" {...fill} opacity="0.5" />
+      </svg>
+    );
+  }
+  if (kind === "workplace") {
+    // Stacking demands — layered rectangles like deadlines piling up
+    return (
+      <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
+        <rect x="22" y="74" width="76" height="20" rx="4" {...stroke} />
+        <rect x="28" y="58" width="64" height="16" rx="4" {...stroke} opacity="0.75" />
+        <rect x="34" y="44" width="52" height="14" rx="3" {...stroke} opacity="0.55" />
+        <rect x="40" y="32" width="40" height="12" rx="3" {...stroke} opacity="0.4" />
+        <line {...accentStroke} x1="14" y1="100" x2="106" y2="100" />
+        <circle cx="86" cy="84" r="2.5" {...fill} />
+      </svg>
+    );
+  }
+  return null;
+};
+
 const ConcernsSection = ({ lang = "en" }) => {
   const c = (COPY[lang] || COPY.en).concerns || COPY.en.concerns;
+  const themes = [
+    { kind: "anxiety",      bg: "linear-gradient(155deg, #F5DDD2 0%, #FBF8F1 100%)", color: "#A85F42", accent: "#3D5A4A" },
+    { kind: "depression",   bg: "linear-gradient(155deg, #DDE6E0 0%, #FBF8F1 100%)", color: "#2A4135", accent: "#C97A5A" },
+    { kind: "burnout",      bg: "linear-gradient(155deg, #F1E2C2 0%, #FBF8F1 100%)", color: "#A8843A", accent: "#A85F42" },
+    { kind: "relationships",bg: "linear-gradient(155deg, #E2EAE4 0%, #FBF8F1 100%)", color: "#3D5A4A", accent: "#C97A5A" },
+    { kind: "workplace",    bg: "linear-gradient(155deg, #E6DEC9 0%, #FBF8F1 100%)", color: "#1F2421", accent: "#A85F42" },
+  ];
   return (
     <section className="surface-cream">
       <div className="container">
@@ -13,21 +102,43 @@ const ConcernsSection = ({ lang = "en" }) => {
           <p className="lede" style={{ maxWidth: 480 }}>{c.lede}</p>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }} className="concerns-grid">
-          {c.items.map((it, i) => (
-            <a key={i} href="how-it-works.html" className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", aspectRatio: "3/4", padding: 22 }}>
-              <div style={{ width: 36, height: 36, borderRadius: 10, background: ["var(--terracotta)","var(--sage)","var(--gold)","var(--sage-soft)","var(--ink)"][i % 5], opacity: 0.9 }}/>
-              <div>
-                <div className="h-3" style={{ marginBottom: 6 }}>{it.name}</div>
-                <div className="muted" style={{ fontSize: 13 }}>{it.count}</div>
-              </div>
-            </a>
-          ))}
+          {c.items.map((it, i) => {
+            const theme = themes[i % themes.length];
+            return (
+              <a
+                key={i}
+                href="how-it-works.html"
+                className="card concern-card"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  aspectRatio: "3/4",
+                  padding: 22,
+                  background: theme.bg,
+                  border: "1px solid var(--line-soft)",
+                  overflow: "hidden",
+                  position: "relative",
+                }}
+              >
+                <div style={{ flex: 1, marginBottom: 8, marginLeft: -6, marginTop: -6 }}>
+                  <ConcernArt kind={theme.kind} color={theme.color} accent={theme.accent} />
+                </div>
+                <div>
+                  <div className="h-3" style={{ marginBottom: 6, color: "var(--ink)" }}>{it.name}</div>
+                  <div className="muted" style={{ fontSize: 13 }}>{it.count}</div>
+                </div>
+              </a>
+            );
+          })}
         </div>
       </div>
       <style>{`
         @media (max-width: 900px) {
           .concerns-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
+        .concern-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .concern-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(31,36,33,0.08); }
       `}</style>
     </section>
   );
